@@ -18,3 +18,5 @@ async function mongoConnect(mongoURL){
     }
 }
 
+module.exports = {mongoConnect};
+
