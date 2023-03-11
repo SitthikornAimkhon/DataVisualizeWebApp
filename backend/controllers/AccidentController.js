@@ -1,4 +1,5 @@
-const AccidentModel = require("../models/mongo/AccidentModel");
+// Switch between mongodb and mysql by changing AccidentModel path
+const AccidentModel = require("../models/mongo/AccidentModel"); 
 const Accident = new AccidentModel();
 
 class AccidentController {
