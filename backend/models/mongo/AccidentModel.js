@@ -17,7 +17,7 @@ const accidentSchema = new mongoose.Schema({
 
 class AccidentModel {
     
-    Accident;
+    static Accident;
 
     constructor() {
         this.connect();
