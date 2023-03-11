@@ -9,6 +9,13 @@ const { SERVER_PORT, DB_URL } = process.env;
 app.use('/', accident);
 
 
-app.listen(SERVER_PORT, () => {
+const server = app.listen(SERVER_PORT, () => {
 	console.log(`listening on port ${SERVER_PORT}`)
 });
+
+// Graceful shutdown
+process.on('SIGINT', () => {
+	server.close(() => {
+	  console.debug('server closed')
+	})
+  })
