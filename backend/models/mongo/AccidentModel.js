@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+require('dotenv').config({path:"../.env"});
+const { DB_URL } = process.env;
 
 const accidentSchema = new mongoose.Schema({
     accident_date: Date,
@@ -13,20 +15,18 @@ const accidentSchema = new mongoose.Schema({
 
 });
 
-class MongoModel {
+class AccidentModel {
     
-    dbUrl;
     Accident;
 
-    constructor(dbUrl) {
-        this.dbUrl = dbUrl;
+    constructor() {
         this.connect();
     }
 
     connect() {
 
         mongoose
-        .connect(this.dbUrl)
+        .connect(DB_URL)
         .then(() => console.log("Database Connected"))
         .catch((err) => console.log(err));
 
@@ -46,4 +46,4 @@ class MongoModel {
     }
 }
 
-module.exports = MongoModel;
+module.exports = AccidentModel;
