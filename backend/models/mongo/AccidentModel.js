@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
 require('dotenv').config({path:"../.env"});
-const { DB_URL } = process.env;
+
+const { MONGODB_URL } = process.env;
+const mongoose = require("mongoose");
 
 const accidentSchema = new mongoose.Schema({
     accident_date: Date,
@@ -21,12 +22,18 @@ class AccidentModel {
 
     constructor() {
         this.connect();
+
+        // Disconnect when app closed
+        process.on('SIGINT', () => {
+            mongoose.disconnect()
+            console.log('\nMongo connection was closed');
+        });
     }
 
     connect() {
 
         mongoose
-        .connect(DB_URL)
+        .connect(MONGODB_URL)
         .then(() => console.log("Database Connected"))
         .catch((err) => console.log(err));
 
