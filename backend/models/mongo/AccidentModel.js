@@ -1,4 +1,4 @@
-require('dotenv').config({path:"../.env"});
+require('dotenv').config();
 
 const { MONGODB_URL } = process.env;
 const mongoose = require("mongoose");
@@ -50,6 +50,12 @@ class AccidentModel {
     async findAllbetweenDate(startDate, endDate) {
         // Example findAllbetweenDate("2023-01-20", "2023-01-31")
         return await this.Accident.find({accident_date:{$gte: startDate,$lte: endDate}});
+    }
+
+    async insertMany(accidents) {
+        const result = await this.Accident.insertMany(accidents);
+        
+        return result;
     }
 }
 

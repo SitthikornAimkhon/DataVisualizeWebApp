@@ -16,6 +16,20 @@ class AccidentController {
 
     res.send(accidents);
   }
+
+  async insertManyAccidents(req, res) {
+    const accidents = req.body.accidents;
+
+    try {
+      const result = await Accident.insertMany(accidents)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(201).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
 }
 
 module.exports = AccidentController;
