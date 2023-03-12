@@ -6,12 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 // Import from components file
-import { NavbarBtn } from './components/NavbarBtn';
+import { NavbarApp } from './components/NavbarApp';
 
 function App() {
   return (
     <div>
-      <NavbarBtn />
+      <NavbarApp />
       <Container>
         <Row>
           <Col>
