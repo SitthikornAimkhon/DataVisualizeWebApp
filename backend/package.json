@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start:dev": "nodemon -r dotenv/config ./app.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^5.1.0",
+    "mongoose": "^7.0.1",
+    "mysql": "^2.18.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
