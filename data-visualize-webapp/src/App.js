@@ -4,6 +4,7 @@ import './App.css';
 // You can specify which plugins you need here
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useState } from 'react';
 
 // Import from components file
 import { NavbarApp } from './components/NavbarApp';
