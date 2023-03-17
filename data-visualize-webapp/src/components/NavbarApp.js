@@ -14,20 +14,12 @@ export function NavbarApp(props) {
 		</option>
 	);
 
-	// Declare a new state variable 
-	const [yearVal, setYear] = useState(YearsList[0]);
-	const [roadNameVal, setRoadName] = useState(RoadsList[0]);
-
-	// Log the value from state variable
-	// console.log(yearVal.props.value);
-	// console.log(roadNameVal.props.value);
-
 	const handleChangeYear = event => {
-		setYear(event.target.value);
+		props.setYear(event.target.value);
 	};
 
 	const handleChangeRoadName = event => {
-		setRoadName(event.target.value);
+		props.setRoadName(event.target.value);
 	};
 
 	return (
