@@ -82,7 +82,6 @@ class AccidentModel {
 
     const selectedFields = {
       _id: 1,
-      accident_date: 1,
       dead_man: 1,
       dead_femel: 1,
     };
@@ -119,6 +118,67 @@ class AccidentModel {
     }, initDeadStat);
 
     return deadStat;
+  }
+
+  async findAllInjure(expresswayName = null,
+    searchYear = new Date().getFullYear()) {
+      const query = {
+        $expr: {
+          $and: [
+            {
+              $eq: [
+                {
+                  $year: "$accident_date",
+                },
+                searchYear,
+              ],
+            },
+            expresswayName
+              ? {
+                  $eq: ["$expw_step", expresswayName],
+                }
+              : {},
+          ],
+        },
+      };
+  
+      const selectedFields = {
+        _id: 1,
+        injur_femel: 1,
+        injur_man: 1,
+      };
+  
+      const injureResult = await this.Accident.find(query, selectedFields);
+  
+      // If there is no accident
+      if (injureResult.length == 0) {
+        return [];
+      }
+  
+      return injureResult;
+  }
+
+  async findInjureStat(expresswayName = null,
+    searchYear = new Date().getFullYear()) {
+      
+      const injureResult = await this.findAllInjure(expresswayName, searchYear);
+
+      let initInjureStat = {
+        total_injure: 0,
+        total_man: 0,
+        total_female: 0,
+      };
+  
+      const injureStat = injureResult.reduce((obj, d) => {
+        let tmpObj = { ...obj };
+        tmpObj.total_man += d.injur_man;
+        tmpObj.total_female += d.injur_femel;
+        tmpObj.total_injure = tmpObj.total_female + tmpObj.total_man;
+  
+        return tmpObj;
+      }, initInjureStat);
+  
+      return injureStat;
   }
 }
 

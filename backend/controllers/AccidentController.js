@@ -60,6 +60,35 @@ class AccidentController {
       res.status(400).send({message: "Bad Request"});
     }
   }
+  async findAllInjure(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+
+    try {
+      const result = await Accident.findAllInjure(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
+
+  async findInjureStat(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+
+    try {
+      const result = await Accident.findInjureStat(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
 
 
 }
