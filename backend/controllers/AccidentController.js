@@ -89,6 +89,35 @@ class AccidentController {
       res.status(400).send({message: "Bad Request"});
     }
   }
+  async findAllWeather(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+
+    try {
+      const result = await Accident.findAllWeather(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
+
+  async findWeatherStat(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+
+    try {
+      const result = await Accident.findWeatherStat(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
 
 
 }

@@ -180,6 +180,82 @@ class AccidentModel {
   
       return injureStat;
   }
+
+  async findAllWeather(expresswayName = null,
+    searchYear = new Date().getFullYear()) {
+      const query = {
+        $expr: {
+          $and: [
+            {
+              $eq: [
+                {
+                  $year: "$accident_date",
+                },
+                searchYear,
+              ],
+            },
+            expresswayName
+              ? {
+                  $eq: ["$expw_step", expresswayName],
+                }
+              : {},
+          ],
+        },
+      };
+  
+      const selectedFields = {
+        _id: 1,
+        weather_state: 1,
+      };
+  
+      const weatherResult = await this.Accident.find(query, selectedFields);
+  
+      // If there is no accident
+      if (weatherResult.length == 0) {
+        return [];
+      }
+  
+      return weatherResult;
+  }
+
+  async findWeatherStat(expresswayName = null,
+    searchYear = new Date().getFullYear()) {
+      
+      const weatherResult = await this.findAllWeather(expresswayName, searchYear);
+
+      let initweatherStat = {
+        total_normal: 0,
+        total_abnormal: 0,
+        rain: 0,
+        heavy_rain: 0,
+        slippy_road: 0,
+      };
+  
+      const weatherStat = weatherResult.reduce((obj, d) => {
+        let tmpObj = { ...obj };
+        console.log(d.weather_state)
+        switch (d.weather_state) {
+          case 'ฝนตก':
+            tmpObj.rain += 1;
+            break;
+          case 'ฝนตกลมแรง':
+            tmpObj.heavy_rain += 1;
+            break;
+          case 'ถนนเปียกลื่น':
+            tmpObj.slippy_road += 1;
+            break;
+          default:
+            tmpObj.total_normal += 1;
+            break;
+        }
+        
+        tmpObj.total_abnormal = tmpObj.rain + tmpObj.heavy_rain + tmpObj.slippy_road;
+  
+        return tmpObj;
+      }, initweatherStat);
+  
+      return weatherStat;
+  }
 }
 
 module.exports = AccidentModel;

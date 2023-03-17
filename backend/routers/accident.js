@@ -10,6 +10,8 @@ router.get('/death/stat', accidentController.findDeadStat);
 router.post('/', accidentController.insertManyAccidents);
 router.get('/injure', accidentController.findAllInjure);
 router.get('/injure/stat', accidentController.findInjureStat);
+router.get('/weather', accidentController.findAllWeather);
+router.get('/weather/stat', accidentController.findWeatherStat);
 
 
 module.exports = router;
