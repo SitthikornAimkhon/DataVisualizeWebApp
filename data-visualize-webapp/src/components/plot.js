@@ -9,6 +9,7 @@ export function Piechart(probs){
             labels:probs.labels, 
             values:probs.values,
             type: 'pie',
+            marker: {colors:['rgb(33, 37, 41)','rgb(220,53,69)']}
           }
         ]}
         layout={ {width: 400, height: 600, title: 'Death & Injured ratio'} }
