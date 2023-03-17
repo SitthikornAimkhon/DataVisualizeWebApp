@@ -1,5 +1,5 @@
 // Switch between mongodb and mysql by changing AccidentModel path
-const AccidentModel = require("../models/mongo/AccidentModel"); 
+const AccidentModel = require("../models/mongo/AccidentModel.js"); 
 const Accident = new AccidentModel();
 
 class AccidentController {
@@ -7,7 +7,7 @@ class AccidentController {
     console.log("Initializing AccidentController");
   }
 
-  async getAccidentData(req, res) {
+  async findAccidentData(req, res) {
     const accidents = await Accident.findAll()
       .catch((e) => {
         console.error(e);
@@ -30,6 +30,110 @@ class AccidentController {
       res.status(400).send({message: "Bad Request"});
     }
   }
+
+  async findAllDeath(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+
+    try {
+      const result = await Accident.findAllDeath(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
+
+  async findDeadStat(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+
+    try {
+      const result = await Accident.findDeadStat(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
+  async findAllInjure(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+
+    try {
+      const result = await Accident.findAllInjure(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
+
+  async findInjureStat(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+
+    try {
+      const result = await Accident.findInjureStat(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
+  async findAllWeather(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+
+    try {
+      const result = await Accident.findAllWeather(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
+  
+  async findWeatherStat(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+    
+    try {
+      const result = await Accident.findWeatherStat(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
+  
+  async findAllCause(req, res) {
+    const searchYear = req.query?.searchYear || new Date().getFullYear();
+    const expresswayName = req.query?.expresswayName || null
+  
+    try {
+      const result = await Accident.findAllCause(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
+  
 }
 
 module.exports = AccidentController;
