@@ -5,13 +5,14 @@ const AccidentController = require('../controllers/AccidentController');
 const accidentController = new AccidentController();
 
 router.get('/', accidentController.findAccidentData);
-router.get('/death', accidentController.findAllDeath);
-router.get('/death/stat', accidentController.findDeadStat);
+router.get('/deads', accidentController.findAllDeath);
+router.get('/deads/stat', accidentController.findDeadStat);
 router.post('/', accidentController.insertManyAccidents);
-router.get('/injure', accidentController.findAllInjure);
-router.get('/injure/stat', accidentController.findInjureStat);
-router.get('/weather', accidentController.findAllWeather);
-router.get('/weather/stat', accidentController.findWeatherStat);
+router.get('/injures', accidentController.findAllInjure);
+router.get('/injures/stat', accidentController.findInjureStat);
+router.get('/weathers', accidentController.findAllWeather);
+router.get('/weathers/stat', accidentController.findWeatherStat);
+router.get('/causes', accidentController.findAllCause);
 
 
 module.exports = router;
