@@ -237,7 +237,6 @@ class AccidentModel {
     searchYear = new Date().getFullYear()
   ) {
     const weatherResult = await this.findAllWeather(expresswayName, searchYear);
-
     let initweatherStat = {
       total_normal: 0,
       total_abnormal: 0,
@@ -248,7 +247,6 @@ class AccidentModel {
 
     const weatherStat = weatherResult.reduce((obj, d) => {
       let tmpObj = { ...obj };
-      console.log(d.weather_state);
       switch (d.weather_state) {
         case "ฝนตก":
           tmpObj.rain += 1;
@@ -272,6 +270,49 @@ class AccidentModel {
 
     return weatherStat;
   }
+
+  async findAllCause(
+    expresswayName = null,
+    searchYear = new Date().getFullYear()
+  ) {
+    const query = {
+      $expr: {
+        $and: [
+          {
+            $eq: [
+              {
+                $year: "$accident_date",
+              },
+              searchYear,
+            ],
+          },
+          expresswayName
+            ? {
+                $eq: ["$expw_step", expresswayName],
+              }
+            : {},
+        ],
+      },
+    };
+
+    const selectedFields = {
+      _id: 1,
+      accident_date: 1,
+      accident_time: 1,
+      expw_step: 1,
+      cause: 1,
+    };
+
+    const causeResult = await this.Accident.find(query, selectedFields);
+
+    // If there is no accident
+    if (causeResult.length == 0) {
+      return [];
+    }
+
+    return causeResult;
+  }
+
 }
 
 module.exports = AccidentModel;
