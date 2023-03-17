@@ -97,7 +97,7 @@ class AccidentModel {
     return deadResult;
   }
 
-  async getDeadStat(
+  async findDeadStat(
     expresswayName = null,
     searchYear = new Date().getFullYear()
   ) {

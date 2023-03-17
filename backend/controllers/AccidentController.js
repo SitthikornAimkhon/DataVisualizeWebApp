@@ -7,7 +7,7 @@ class AccidentController {
     console.log("Initializing AccidentController");
   }
 
-  async getAccidentData(req, res) {
+  async findAccidentData(req, res) {
     const accidents = await Accident.findAll()
       .catch((e) => {
         console.error(e);
@@ -46,12 +46,12 @@ class AccidentController {
     }
   }
 
-  async getDeadStat(req, res) {
+  async findDeadStat(req, res) {
     const searchYear = req.query?.searchYear || new Date().getFullYear();
     const expresswayName = req.query?.expresswayName || null
 
     try {
-      const result = await Accident.getDeadStat(expresswayName, searchYear)
+      const result = await Accident.findDeadStat(expresswayName, searchYear)
       .catch((e) => {
         console.error(e);
       });

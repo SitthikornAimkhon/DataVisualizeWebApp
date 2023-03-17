@@ -4,9 +4,9 @@ const AccidentController = require('../controllers/AccidentController');
 
 const accidentController = new AccidentController();
 
-router.get('/', accidentController.getAccidentData);
+router.get('/', accidentController.findAccidentData);
 router.get('/death', accidentController.findAllDeath);
-router.get('/death/stat', accidentController.getDeadStat);
+router.get('/death/stat', accidentController.findDeadStat);
 router.post('/', accidentController.insertManyAccidents);
 
 module.exports = router;
