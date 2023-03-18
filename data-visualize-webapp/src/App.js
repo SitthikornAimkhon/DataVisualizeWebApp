@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 
+import Plotly from "plotly.js-basic-dist-min";
+
 // You can specify which plugins you need here
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -10,7 +12,24 @@ import { NavbarApp } from './components/NavbarApp';
 import { Header } from './components/Header';
 import { CardInformation } from './components/CardInformation';
 import { CardWeather } from './components/CardWeather';
-import { Barchart,Linechart,Piechart } from './components/plot';
+import { Barchart, Linechart, Piechart } from './components/plot';
+// import { Barchart,Linechart,Piechart } from './components/plot';
+// import { PieChart } from './components/plot';
+// var h = 600
+// var w = 600
+
+// window.addEventListener('resize', function() {
+// //   Plotly.relayout('myDiv', {
+// //     'xaxis.autorange': true,
+// //     'yaxis.autorange': true
+// // })
+//   Plotly.Plots.resize('lineDiv')
+//   Plotly.Plots.resize('barDiv')
+//   Plotly.Plots.resize('pieDiv')
+//   console.log(h)
+//   console.log(w)
+// });
+
 
 function App() {
   const yearArray = ["No select", "1", "2", "3", "4"];
@@ -24,8 +43,8 @@ function App() {
 // for line chart
   const time = ['10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00']
   const count2 = [324,3443,434,23,43,234,34,123]
-
   return (
+    
     <div>
       <NavbarApp YearArray={yearArray} RoadArray={roadArray}/>
       <Container>
@@ -52,7 +71,7 @@ function App() {
               <Barchart locations={locations} death_counts={count1}/>
             </div>
             <div class="item-6">
-              <Piechart labels={labels} values={values}/>
+              <Piechart values={values}/>
             </div>
           </div>
         </Row>
@@ -62,3 +81,5 @@ function App() {
 }
 
 export default App;
+
+
