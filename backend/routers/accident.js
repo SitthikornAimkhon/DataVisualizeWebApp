@@ -12,7 +12,8 @@ router.get('/injures', accidentController.findAllInjure);
 router.get('/injures/stat', accidentController.findInjureStat);
 router.get('/weathers', accidentController.findAllWeather);
 router.get('/weathers/stat', accidentController.findWeatherStat);
-router.get('/causes', accidentController.findAllCause);
+router.get('/years', accidentController.findYearAvailable);
+
 
 
 module.exports = router;
