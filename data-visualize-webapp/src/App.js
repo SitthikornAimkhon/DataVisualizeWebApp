@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 
+import Plotly from "plotly.js-basic-dist-min";
+
 // You can specify which plugins you need here
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -12,33 +14,56 @@ import { Header } from './components/Header';
 import { CardInformation } from './components/CardInformation';
 import { CardWeather } from './components/CardWeather';
 import { Barchart, Linechart, Piechart } from './components/plot';
+// import { Barchart,Linechart,Piechart } from './components/plot';
+// import { PieChart } from './components/plot';
+// var h = 600
+// var w = 600
+
+// window.addEventListener('resize', function() {
+// //   Plotly.relayout('myDiv', {
+// //     'xaxis.autorange': true,
+// //     'yaxis.autorange': true
+// // })
+//   Plotly.Plots.resize('lineDiv')
+//   Plotly.Plots.resize('barDiv')
+//   Plotly.Plots.resize('pieDiv')
+//   console.log(h)
+//   console.log(w)
+// });
+
 
 function App() {
 
   // Card number
+  // const [TotalNumberDeath , setTotalNumberDeath] = useState(55);
+  // const [TotalManNumberDeath , setTotalManNumberDeath] = useState(55);
+  // const [TotalWomanNumberDeath , setTotalWomanNumberDeath] = useState(55);
   const TotalNumberDeath = 21
   const TotalManNumberDeath = 21
   const TotalWomanNumberDeath = 12
 
+  // const [TotalNumberInjured , setTotalNumberInjured] = useState(55);
+  // const [TotalManNumberInjured , setTotalManNumberInjured] = useState(55);
+  // const [TotalWomanNumberInjured , setTotalWomanNumberInjured] = useState(55);
   const TotalNumberInjured = 34
   const TotalManNumberInjured = 32
   const TotalWomanNumberInjured = 3
-
+  // const [TotalCaseNumber , setTotalCaseNumber] = useState(55);
+  // const [TotalNormalNumber , setTotalNormalNumber] = useState(55);
+  // const [TotalAbnormalNumber , setTotalAbnormalNumber] = useState(55);
   const TotalCaseNumber = 34
   const TotalNormalNumber = 34
   const TotalAbnormalNumber = 34
 
   // Declare a new state variable 
-  const yearArray = ["No select", "1", "2", "3", "4"];
-  const roadArray = ["No select", "1", "2", "3", "4"];
+  const yearArray = ["No select", "2564", "2563", "2562", "2561", "2560", "2559"];  //please write function to update this variable
+  const roadArray = ["No select", "1", "2", "3", "4"]; //please write function to update this variable
 
   const [yearVal, setYear] = useState(yearArray[0]);
   const [roadNameVal, setRoadName] = useState(roadArray[0]);
 
-  // Log the value from state variable
-  console.log(yearVal);
-  console.log(roadNameVal);
-  
+  const year = yearVal;
+  const roadname = roadNameVal;
 
   // Plot graph
   // for pie chart
@@ -59,12 +84,13 @@ function App() {
   // }, [yearVal, roadNameVal]);
 
   return (
+    
     <div>
       <NavbarApp YearArray={yearArray} RoadArray={roadArray} setYear={setYear} setRoadName={setRoadName} />
       <Container>
         <Row>
           <Col>
-            <Header year="2558" roadName="ศรีรัช" />
+            <Header year={year} roadName={roadname}/>
           </Col>
         </Row>
         <Row>
@@ -85,7 +111,7 @@ function App() {
               <Barchart locations={locations} death_counts={count1} />
             </div>
             <div class="item-6">
-              <Piechart labels={labels} values={values} />
+              <Piechart values={values}/>
             </div>
           </div>
         </Row>
@@ -95,3 +121,5 @@ function App() {
 }
 
 export default App;
+
+
