@@ -236,6 +236,25 @@ class AccidentModel {
     return weatherStat;
   }
 
+  async findYearAvailable() {
+    const query = [
+      {
+        $group: {
+          _id: null,
+          years: {
+            $addToSet: {
+              $dateToString: { date: "$accident_date", format: "%Y" },
+            },
+          },
+        },
+      },
+    ];
+
+    const yearAvailable = await this.Accident.aggregate(query);
+
+    return yearAvailable.pop().years;
+  }
+
 }
 
 module.exports = AccidentModel;
