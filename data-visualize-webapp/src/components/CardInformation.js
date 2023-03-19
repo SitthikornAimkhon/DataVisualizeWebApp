@@ -9,12 +9,6 @@ export function CardInformation(props) {
                         <Card.Subtitle className="mb-2 ">Total {props.CardTitle} : {props.TotalNumber}</Card.Subtitle>
                         <Card.Subtitle className="mb-2 ">Man number : {props.TotalManNumber}</Card.Subtitle>
                         <Card.Subtitle className="mb-2 ">Woman number : {props.TotalWomanNumber}</Card.Subtitle>
-                        {/* <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text>
-                        <Card.Link href="#">Card Link</Card.Link>
-                        <Card.Link href="#">Another Link</Card.Link> */}
                     </Card.Body>
                 </Card>
     );
