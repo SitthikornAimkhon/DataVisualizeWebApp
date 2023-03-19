@@ -263,6 +263,40 @@ class AccidentModel {
     return roadAvailable;
   }
 
+  async findAccidentOnRoad(expresswayName = '', searchYear = '') {
+    const query = [
+      {
+        $match: {
+          $expr:
+            searchYear != null && searchYear != ""
+              ? {
+                  $eq: [{ $year: "$accident_date" }, +searchYear],
+                }
+              : {},
+        },
+      },
+      {
+        $group: {
+          _id: "$expw_step",
+          count: { $sum: 1 },
+        },
+      },
+    ];
+    const res = await this.Accident.aggregate(query);
+
+    const result = res.reduce((arr, obj) => {
+      const data = {
+        name: obj._id,
+        count: obj.count,
+      };
+
+      arr.push(data);
+      return arr;
+    }, []);
+
+    return result;
+  }
+
 }
 
 module.exports = AccidentModel;
