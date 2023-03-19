@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Nav, Navbar, Form } from 'react-bootstrap'
-import { useState } from 'react';
 
 export function NavbarApp(props) {
 	const YearsList = props.YearArray.map((Year, index) =>
@@ -15,11 +14,19 @@ export function NavbarApp(props) {
 	);
 
 	const handleChangeYear = event => {
-		props.setYear(event.target.value);
+		let year = event.target.value;
+		if(year === 'กรุณาเลือกปี'){
+			year = '';
+		}
+		props.setYear(year);
 	};
 
 	const handleChangeRoadName = event => {
-		props.setRoadName(event.target.value);
+		let road = event.target.value;
+		if(road === 'กรุณาเลือกถนน'){
+			road = '';
+		}
+		props.setRoadName(road);
 	};
 
 	return (
@@ -31,10 +38,12 @@ export function NavbarApp(props) {
 					<Nav className="me-auto">
 						<Form.Label style={{ color: "white", marginRight: "1rem", fontSize: "1.25rem" }}>Year:</Form.Label>
 						<Form.Select onChange={handleChangeYear} size='sm' aria-label="Default select example" id='selectYear' style={{ marginRight: "10px" }}>
+							<option>กรุณาเลือกปี</option>
 							{YearsList}
 						</Form.Select>
 						<Form.Label style={{ color: "white", marginRight: "1rem", fontSize: "1.25rem" }}>Location:</Form.Label>
 						<Form.Select onChange={handleChangeRoadName} size='sm' aria-label="Default select example" id='selectPosition'>
+							<option>กรุณาเลือกถนน</option>
 							{RoadsList}
 						</Form.Select>
 					</Nav>
