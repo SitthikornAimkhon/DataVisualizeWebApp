@@ -245,8 +245,14 @@ class AccidentModel {
     ];
 
     const yearAvailable = await this.Accident.aggregate(query);
+    // parse year value to integer
+    const formated = yearAvailable.pop().years.map((y)=>(+y));
 
-    return yearAvailable.pop().years;
+    // sort DESC
+    formated.sort();
+    formated.reverse();
+    
+    return formated;
   }
 
   async findRoadAvailable() {
