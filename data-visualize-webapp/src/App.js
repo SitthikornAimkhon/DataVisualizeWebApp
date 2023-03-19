@@ -1,7 +1,5 @@
 import "./App.css";
 
-import Plotly from "plotly.js-basic-dist-min";
-
 // You can specify which plugins you need here
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
