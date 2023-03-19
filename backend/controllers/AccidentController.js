@@ -8,8 +8,8 @@ class AccidentController {
   }
 
   async findAccidentData(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName || null
+    const searchYear = req.query?.searchYear || '';
+    const expresswayName = req.query?.expresswayName || '';
     const accidents = await Accident.findAll(expresswayName, searchYear)
       .catch((e) => {
         console.error(e);
@@ -34,8 +34,8 @@ class AccidentController {
   }
 
   async findAllDeath(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName || null
+    const searchYear = req.query?.searchYear || '';
+    const expresswayName = req.query?.expresswayName || '';
 
     try {
       const result = await Accident.findAllDeath(expresswayName, searchYear)
@@ -49,8 +49,8 @@ class AccidentController {
   }
 
   async findDeadStat(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName || null
+    const searchYear = req.query?.searchYear || '';
+    const expresswayName = req.query?.expresswayName || '';
 
     try {
       const result = await Accident.findDeadStat(expresswayName, searchYear)
@@ -63,8 +63,8 @@ class AccidentController {
     }
   }
   async findAllInjure(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName || null
+    const searchYear = req.query?.searchYear || '';
+    const expresswayName = req.query?.expresswayName || '';
 
     try {
       const result = await Accident.findAllInjure(expresswayName, searchYear)
@@ -78,8 +78,8 @@ class AccidentController {
   }
 
   async findInjureStat(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName || null
+    const searchYear = req.query?.searchYear || '';
+    const expresswayName = req.query?.expresswayName || '';
 
     try {
       const result = await Accident.findInjureStat(expresswayName, searchYear)
@@ -92,8 +92,8 @@ class AccidentController {
     }
   }
   async findAllWeather(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName || null
+    const searchYear = req.query?.searchYear || '';
+    const expresswayName = req.query?.expresswayName || '';
 
     try {
       const result = await Accident.findAllWeather(expresswayName, searchYear)
@@ -107,8 +107,8 @@ class AccidentController {
   }
   
   async findWeatherStat(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName || null
+    const searchYear = req.query?.searchYear || '';
+    const expresswayName = req.query?.expresswayName || '';
     
     try {
       const result = await Accident.findWeatherStat(expresswayName, searchYear)
@@ -122,8 +122,8 @@ class AccidentController {
   }
 
   async findYearAvailable(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName || null
+    const searchYear = req.query?.searchYear || '';
+    const expresswayName = req.query?.expresswayName || '';
   
     try {
       const result = await Accident.findYearAvailable(expresswayName, searchYear)
@@ -137,8 +137,8 @@ class AccidentController {
   }
 
   async findRoadAvailable(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName || null
+    const searchYear = req.query?.searchYear || '';
+    const expresswayName = req.query?.expresswayName || '';
   
     try {
       const result = await Accident.findRoadAvailable(expresswayName, searchYear)
@@ -151,11 +151,9 @@ class AccidentController {
     }
   }
   async findAccidentOnRoad(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName
-  
+    const searchYear = req.query?.searchYear || '';  
     try {
-      const result = await Accident.findAccidentOnRoad(expresswayName, searchYear)
+      const result = await Accident.findAccidentOnRoad(searchYear)
       .catch((e) => {
         console.error(e);
       });
@@ -166,8 +164,8 @@ class AccidentController {
   }
 
   async findAccidentFreqency(req, res) {
-    const searchYear = req.query?.searchYear;
-    const expresswayName = req.query?.expresswayName
+    const searchYear = req.query?.searchYear || '';
+    const expresswayName = req.query?.expresswayName || '';
   
     try {
       const result = await Accident.findAccidentFreqency(expresswayName, searchYear)

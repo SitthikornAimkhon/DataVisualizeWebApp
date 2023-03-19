@@ -39,49 +39,40 @@ class AccidentModel {
     this.Accident = mongoose.model("Accident", accidentSchema);
   }
 
-  async findAll(expresswayName = '', searchYear = '') {
-    const query =
-      (searchYear != "" && expresswayName != "")
-        ? {
-            $expr: {
-              $and: [
-                searchYear
-                  ? {
-                      $eq: [
-                        {
-                          $year: "$accident_date",
-                        },
-                        searchYear,
-                      ],
-                    }
-                  : {},
-                expresswayName
-                  ? {
-                      $eq: ["$expw_step", expresswayName],
-                    }
-                  : {},
-              ],
-            },
-          }
-        : {};
+  async findAll(expresswayName = "", searchYear = "") {
+    let query;
+
+    if (searchYear === "" && expresswayName === "") {
+      query = {};
+    } else {
+      query = {
+        $expr: {
+          $and: [
+            searchYear ? { $eq: [{ $year: "$accident_date" }, +searchYear] } : {},
+            expresswayName ? { $eq: ["$expw_step", expresswayName] } : {},
+          ],
+        },
+      };
+    }
     const accidentResult = await this.Accident.find(query);
     return accidentResult;
   }
 
-  async findAllDeath(expresswayName = '', searchYear = '') {
-    const query =
-      (searchYear != "" && expresswayName != "")
-        ? {
-            $expr: {
-              $and: [
-                searchYear
-                  ? { $eq: [{ $year: "$accident_date" }, searchYear] }
-                  : {},
-                expresswayName ? { $eq: ["$expw_step", expresswayName] } : {},
-              ],
-            },
-          }
-        : {};
+  async findAllDeath(expresswayName = "", searchYear = "") {
+    let query;
+
+    if (searchYear === "" && expresswayName === "") {
+      query = {};
+    } else {
+      query = {
+        $expr: {
+          $and: [
+            searchYear ? { $eq: [{ $year: "$accident_date" }, +searchYear] } : {},
+            expresswayName ? { $eq: ["$expw_step", expresswayName] } : {},
+          ],
+        },
+      };
+    }
 
     const selectedFields = {
       _id: 1,
@@ -93,7 +84,8 @@ class AccidentModel {
     };
 
     const deadResult = await this.Accident.find(query, selectedFields);
-
+    console.log(searchYear);
+    console.log(JSON.stringify(query, null, 2));
     // If there is no accident
     if (deadResult.length == 0) {
       return [];
@@ -102,7 +94,7 @@ class AccidentModel {
     return deadResult;
   }
 
-  async findDeadStat(expresswayName = '', searchYear = '') {
+  async findDeadStat(expresswayName = "", searchYear = "") {
     const deadResult = await this.findAllDeath(expresswayName, searchYear);
 
     let initDeadStat = {
@@ -123,20 +115,21 @@ class AccidentModel {
     return deadStat;
   }
 
-  async findAllInjure(expresswayName = '', searchYear = '') {
-    const query =
-      (searchYear != "" && expresswayName != "")
-        ? {
-            $expr: {
-              $and: [
-                searchYear
-                  ? { $eq: [{ $year: "$accident_date" }, searchYear] }
-                  : {},
-                expresswayName ? { $eq: ["$expw_step", expresswayName] } : {},
-              ],
-            },
-          }
-        : {};
+  async findAllInjure(expresswayName = "", searchYear = "") {
+    let query;
+
+    if (searchYear === "" && expresswayName === "") {
+      query = {};
+    } else {
+      query = {
+        $expr: {
+          $and: [
+            searchYear ? { $eq: [{ $year: "$accident_date" }, +searchYear] } : {},
+            expresswayName ? { $eq: ["$expw_step", expresswayName] } : {},
+          ],
+        },
+      };
+    }
 
     const selectedFields = {
       _id: 1,
@@ -157,7 +150,7 @@ class AccidentModel {
     return injureResult;
   }
 
-  async findInjureStat(expresswayName = '', searchYear = '') {
+  async findInjureStat(expresswayName = "", searchYear = "") {
     const injureResult = await this.findAllInjure(expresswayName, searchYear);
 
     let initInjureStat = {
@@ -178,20 +171,21 @@ class AccidentModel {
     return injureStat;
   }
 
-  async findAllWeather(expresswayName = '', searchYear = '') {
-    const query =
-      (searchYear != "" && expresswayName != "")
-        ? {
-            $expr: {
-              $and: [
-                searchYear
-                  ? { $eq: [{ $year: "$accident_date" }, searchYear] }
-                  : {},
-                expresswayName ? { $eq: ["$expw_step", expresswayName] } : {},
-              ],
-            },
-          }
-        : {};
+  async findAllWeather(expresswayName = "", searchYear = "") {
+    let query;
+
+    if (searchYear === "" && expresswayName === "") {
+      query = {};
+    } else {
+      query = {
+        $expr: {
+          $and: [
+            searchYear ? { $eq: [{ $year: "$accident_date" }, +searchYear] } : {},
+            expresswayName ? { $eq: ["$expw_step", expresswayName] } : {},
+          ],
+        },
+      };
+    }
 
     const selectedFields = {
       _id: 1,
@@ -211,7 +205,7 @@ class AccidentModel {
     return weatherResult;
   }
 
-  async findWeatherStat(expresswayName = '', searchYear = '') {
+  async findWeatherStat(expresswayName = "", searchYear = "") {
     const weatherResult = await this.findAllWeather(expresswayName, searchYear);
     let initweatherStat = {
       total: 0,
@@ -251,8 +245,14 @@ class AccidentModel {
     ];
 
     const yearAvailable = await this.Accident.aggregate(query);
+    // parse year value to integer
+    const formated = yearAvailable.pop().years.map((y)=>(+y));
 
-    return yearAvailable.pop().years;
+    // sort DESC
+    formated.sort();
+    formated.reverse();
+    
+    return formated;
   }
 
   async findRoadAvailable() {
@@ -263,12 +263,12 @@ class AccidentModel {
     return roadAvailable;
   }
 
-  async findAccidentOnRoad(expresswayName = '', searchYear = '') {
+  async findAccidentOnRoad(searchYear = "") {
     const query = [
       {
         $match: {
           $expr:
-            searchYear != null && searchYear != ""
+            (searchYear != null && searchYear != "")
               ? {
                   $eq: [{ $year: "$accident_date" }, +searchYear],
                 }
@@ -297,16 +297,16 @@ class AccidentModel {
     return result;
   }
 
-  async findAccidentFreqency(expresswayName = '', searchYear = '') {
+  async findAccidentFreqency(expresswayName = "", searchYear = "") {
     const query = [
       {
         $match: {
           $expr: {
             $and: [
-              (searchYear != "")
-                ? { $eq: [{ $year: "$accident_date" }, searchYear] }
+              (searchYear !== "")
+                ? { $eq: [{ $year: "$accident_date" }, +searchYear] }
                 : {},
-              (expresswayName != "")
+              (expresswayName !== "")
                 ? { $eq: ["$expw_step", expresswayName] }
                 : {},
             ],
@@ -328,19 +328,20 @@ class AccidentModel {
         $sort: { _id: 1 },
       },
     ];
-    console.error(searchYear != null,(searchYear != null || searchYear != ""),(expresswayName != null || expresswayName != ""))
+    console.error(JSON.stringify(query, null, 2)
+    );
     const accidentFreqency = await this.Accident.aggregate(query);
     // If there is no accident
     if (accidentFreqency.length == 0) {
       return [];
     }
 
-    const formated = accidentFreqency.map((d)=>{
+    const formated = accidentFreqency.map((d) => {
       return {
-        time: `${d._id}:00`, 
-        count: d.count
+        time: `${d._id}:00`,
+        count: d.count,
       };
-    })
+    });
 
     return formated;
   }

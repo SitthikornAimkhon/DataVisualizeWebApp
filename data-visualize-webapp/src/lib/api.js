@@ -68,11 +68,10 @@ export async function fetchRoadAvailable(){
     }
 }
 
-export async function findAccidentOnRoad(year='', road=''){
+export async function findAccidentOnRoad(year=''){
     try{
         const res = await fetch('http://localhost:3001/roads/count?' + new URLSearchParams({
-            searchYear: year,
-            expresswayName: road,
+            searchYear: year
         }));
         
         const json = await res.json();

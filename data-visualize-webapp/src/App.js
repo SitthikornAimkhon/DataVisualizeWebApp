@@ -106,7 +106,7 @@ function App() {
     });
 
     // fetch accident available on each road
-    const accidents = findAccidentOnRoad(yearVal, roadNameVal);
+    const accidents = findAccidentOnRoad(yearVal);
     accidents.then((res) => {
       setbarChartData(res);
     });
