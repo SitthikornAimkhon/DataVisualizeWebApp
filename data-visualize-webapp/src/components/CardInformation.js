@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Nav, Navbar, Form, Row, Col, Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 
 export function CardInformation(props) {
     return (
