@@ -255,6 +255,14 @@ class AccidentModel {
     return yearAvailable.pop().years;
   }
 
+  async findRoadAvailable() {
+    const query = "expw_step";
+
+    const roadAvailable = await this.Accident.distinct(query);
+
+    return roadAvailable;
+  }
+
 }
 
 module.exports = AccidentModel;
