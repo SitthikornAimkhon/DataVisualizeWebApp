@@ -18,7 +18,7 @@ export function Header(props) {
     }
 
     return (
-        <Col>
+        <Col style={{paddingTop:'0.5em'}}>
             <SetHeader />
         </Col>
     );

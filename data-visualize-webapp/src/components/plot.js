@@ -6,7 +6,7 @@ export function Piechart(probs) {
     <Plot
       data={[
         {
-          labels: ['a', 'b'],
+          labels: ['Death', 'Injured'],
           values: probs.values,
           type: 'pie',
           marker: { colors: ['rgb(33, 37, 41)', 'rgb(220,53,69)'] }
@@ -25,12 +25,24 @@ export function Barchart(probs) {
     <Plot
       data={[
         {
-          x: probs.locations,
-          y: probs.death_counts,
-          type: "bar"
+          textposition:'inside',
+          y: probs.locations,
+          x: probs.death_counts,
+          type: "bar",
+          orientation: 'h',
+          transforms: [{
+            type: 'sort',
+            target: 'x',
+            order: 'asscending'
+          }]
         }
       ]}
-      layout={{ title: 'Top 3 accidents', autosize: true }}
+      layout={{
+        // yaxis: { title: { text: 'Expressway Name' } },
+        xaxis: { title: { text: 'Number of accidents' } , },
+        title: 'Total Number of accidents',
+        autosize: true
+      }}
       useResizeHandler={true}
       style={{ width: "100%", height: "100%" }}
     />
@@ -49,7 +61,12 @@ export function Linechart(probs) {
           marker: { color: 'red' },
         },
       ]}
-      layout={{ title: 'Accident Count', autosize: true }}
+      layout={{
+        xaxis: { title: { text: 'Time' } },
+        yaxis: { title: { text: 'Number of accidents' } },
+        title: 'Accident Count',
+        autosize: true
+      }}
       useResizeHandler={true}
       style={{ width: "100%", height: "100%" }}
     />

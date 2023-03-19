@@ -11,7 +11,7 @@ export function CardWeather(props) {
             <Card.Body>
                 <Card.Title>{props.CardTitle}</Card.Title>
                 <Card.Subtitle className="mb-2 ">Total Case : {props.TotalCaseNumber}</Card.Subtitle>
-                <Card.Subtitle className="mb-2 ">Norman : {props.TotalNormalNumber}</Card.Subtitle>
+                <Card.Subtitle className="mb-2 ">Normal : {props.TotalNormalNumber}</Card.Subtitle>
                 <Card.Subtitle className="mb-2 ">Abnormal : {props.TotalAbnormalNumber}</Card.Subtitle>
             </Card.Body>
         </Card>
