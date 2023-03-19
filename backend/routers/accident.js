@@ -13,6 +13,7 @@ router.get('/injures/stat', accidentController.findInjureStat);
 router.get('/weathers', accidentController.findAllWeather);
 router.get('/weathers/stat', accidentController.findWeatherStat);
 router.get('/years', accidentController.findYearAvailable);
+router.get('/roads', accidentController.findRoadAvailable);
 
 
 
