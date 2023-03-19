@@ -150,6 +150,21 @@ class AccidentController {
       res.status(400).send({message: "Bad Request"});
     }
   }
+  
+  async findAccidentFreqency(req, res) {
+    const searchYear = req.query?.searchYear;
+    const expresswayName = req.query?.expresswayName
+  
+    try {
+      const result = await Accident.findAccidentFreqency(expresswayName, searchYear)
+      .catch((e) => {
+        console.error(e);
+      });
+      res.status(200).send(result);
+    }catch(e){
+      res.status(400).send({message: "Bad Request"});
+    }
+  }
 }
 
 module.exports = AccidentController;
