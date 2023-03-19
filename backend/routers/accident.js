@@ -15,7 +15,7 @@ router.get('/weathers/stat', accidentController.findWeatherStat);
 router.get('/years', accidentController.findYearAvailable);
 router.get('/roads', accidentController.findRoadAvailable);
 router.get('/roads/count', accidentController.findAccidentOnRoad);
-
+router.get('/freq-time', accidentController.findAccidentFreqency);
 
 
 module.exports = router;
