@@ -297,6 +297,53 @@ class AccidentModel {
     return result;
   }
 
+  async findAccidentFreqency(expresswayName = '', searchYear = '') {
+    const query = [
+      {
+        $match: {
+          $expr: {
+            $and: [
+              (searchYear != "")
+                ? { $eq: [{ $year: "$accident_date" }, searchYear] }
+                : {},
+              (expresswayName != "")
+                ? { $eq: ["$expw_step", expresswayName] }
+                : {},
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          hour: { $substr: ["$accident_time", 0, 2] },
+        },
+      },
+      {
+        $group: {
+          _id: "$hour",
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $sort: { _id: 1 },
+      },
+    ];
+    console.error(searchYear != null,(searchYear != null || searchYear != ""),(expresswayName != null || expresswayName != ""))
+    const accidentFreqency = await this.Accident.aggregate(query);
+    // If there is no accident
+    if (accidentFreqency.length == 0) {
+      return [];
+    }
+
+    const formated = accidentFreqency.map((d)=>{
+      return {
+        time: `${d._id}:00`, 
+        count: d.count
+      };
+    })
+
+    return formated;
+  }
 }
 
 module.exports = AccidentModel;
