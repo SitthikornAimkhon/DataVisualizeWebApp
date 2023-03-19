@@ -15,7 +15,7 @@ export function NavbarApp(props) {
 
 	const handleChangeYear = event => {
 		let year = event.target.value;
-		if(year === 'กรุณาเลือกปี'){
+		if (year === 'กรุณาเลือกปี') {
 			year = '';
 		}
 		props.setYear(year);
@@ -23,7 +23,7 @@ export function NavbarApp(props) {
 
 	const handleChangeRoadName = event => {
 		let road = event.target.value;
-		if(road === 'กรุณาเลือกถนน'){
+		if (road === 'กรุณาเลือกถนน') {
 			road = '';
 		}
 		props.setRoadName(road);

@@ -2,12 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Col } from 'react-bootstrap'
 
 export function Header(props) {
-
     function SetHeader() {
         if (props.year !== "No select" && props.roadName !== "No select") {
             return (<h3>ข้อมูลปี {props.year} ทางพิเศษ {props.roadName}</h3>);
         }
-        else if (props.year !== "No select" && props.roadName === "No select"){
+        else if (props.year !== "No select" && props.roadName === "No select") {
             return (<h3>ข้อมูลปี {props.year}</h3>);
         }
         else if (props.year === "No select" && props.roadName !== "No select") {
@@ -17,7 +16,7 @@ export function Header(props) {
             return (<h3>ข้อมูล</h3>)
         }
     }
-    
+
     return (
         <Col>
             <SetHeader />
