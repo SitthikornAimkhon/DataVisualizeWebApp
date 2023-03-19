@@ -2,7 +2,7 @@ import { handleFetchDeadStat, handleFetchInjureStat, handleFindAccidentOnRoad, h
 
 export async function fetchDeadStat(year='', road=''){
     try{
-        const res = await fetch('http://localhost:3001/deads/stat?' + new URLSearchParams({
+        const res = await fetch('https://data-visualize-wavemamaza-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/deads/stat?' + new URLSearchParams({
             searchYear: year,
             expresswayName: road,
         }));
@@ -18,7 +18,7 @@ export async function fetchDeadStat(year='', road=''){
 
 export async function fetchInjureStat(year='', road=''){
     try{
-        const res = await fetch('http://localhost:3001/injures/stat?' + new URLSearchParams({
+        const res = await fetch('https://data-visualize-wavemamaza-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/injures/stat?' + new URLSearchParams({
             searchYear: year,
             expresswayName: road,
         }));
@@ -34,7 +34,7 @@ export async function fetchInjureStat(year='', road=''){
 
 export async function fetchWeatherStat(year='', road=''){
     try{
-        const res = await fetch('http://localhost:3001/weathers/stat?' + new URLSearchParams({
+        const res = await fetch('https://data-visualize-wavemamaza-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/weathers/stat?' + new URLSearchParams({
             searchYear: year,
             expresswayName: road,
         }));
@@ -48,7 +48,7 @@ export async function fetchWeatherStat(year='', road=''){
 
 export async function fetchYearAvailable(){
     try{
-        const res = await fetch('http://localhost:3001/years');
+        const res = await fetch('https://data-visualize-wavemamaza-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/years');
         const json = await res.json();
         return json;
     }catch(e){
@@ -59,7 +59,7 @@ export async function fetchYearAvailable(){
 
 export async function fetchRoadAvailable(){
     try{
-        const res = await fetch('http://localhost:3001/roads');
+        const res = await fetch('https://data-visualize-wavemamaza-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/roads');
         const json = await res.json();
         return json;
     }catch(e){
@@ -70,7 +70,7 @@ export async function fetchRoadAvailable(){
 
 export async function findAccidentOnRoad(year=''){
     try{
-        const res = await fetch('http://localhost:3001/roads/count?' + new URLSearchParams({
+        const res = await fetch('https://data-visualize-wavemamaza-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/roads/count?' + new URLSearchParams({
             searchYear: year
         }));
         
@@ -85,7 +85,7 @@ export async function findAccidentOnRoad(year=''){
 
 export async function findAccidentFreq(year='', road=''){
     try{
-        const res = await fetch('http://localhost:3001/freq-time?' + new URLSearchParams({
+        const res = await fetch('https://data-visualize-wavemamaza-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/freq-time?' + new URLSearchParams({
             searchYear: year,
             expresswayName: road,
         }));
