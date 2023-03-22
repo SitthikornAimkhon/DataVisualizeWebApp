@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap'
 export function Header(props) {
     function SetHeader() {
         if (props.year !== "No select" && props.roadName !== "No select") {
-            return (<h3>ข้อมูลปี {props.year} ทางพิเศษ {props.roadName}</h3>);
+            return (<h3>ข้อมูลปี {props.year} และ ทางพิเศษ {props.roadName}</h3>);
         }
         else if (props.year !== "No select" && props.roadName === "No select") {
             return (<h3>ข้อมูลปี {props.year}</h3>);
@@ -18,7 +18,7 @@ export function Header(props) {
     }
 
     return (
-        <Col style={{paddingTop:'0.5em'}}>
+        <Col className={props.className?  props.className : ''}>
             <SetHeader />
         </Col>
     );

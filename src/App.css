@@ -72,7 +72,73 @@
   justify-self: stretch;
 }
 
+.item-5-mobile {
+  overflow-x: scroll;
+  display: none;
+}
+
 .item-6 {
   grid-area: 2 / 4 / 2 / 7;
   justify-self: stretch;
+}
+
+.selected-info {
+  padding-top: 0.5rem;
+  text-align: start;
+}
+
+/* Responsive belows */
+
+@media only screen and (max-width: 720px) {
+  .App-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+  }
+  
+  .selected-info {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  /* style text inside */
+  .selected-info * {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+
+  /*  cards and charts */
+  [class*="item-"] {
+    width: 100%;
+  }
+
+  /* stat cards */
+  .item-1, .item-2, .item-3 {
+    margin: 1rem 0;
+    justify-self: center;
+  }
+
+  /* align cards to middle */
+  .item-1 *, .item-2 *, .item-3 *{
+    margin: auto;
+  }
+
+  /* charts */
+  .item-4, .item-5, .item-6 {
+    margin: 1.5rem 0;
+    overflow: scroll;
+  }
+
+  /* hide desktop bar chart */
+  .item-5 {
+    display: none;
+  }
+
+  /* show mobile bar chart */
+  .item-5-mobile {
+    overflow: scroll;
+    display: block;
+  }
+
 }
