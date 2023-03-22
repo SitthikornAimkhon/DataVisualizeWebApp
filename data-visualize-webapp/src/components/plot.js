@@ -26,11 +26,11 @@ export function Barchart(probs) {
       data={[
         {
           textposition:'inside',
-          y: probs.locations,
-          x: probs.death_counts,
+          y: probs.y,
+          x: probs.x,
           type: "bar",
-          orientation: 'h',
-          transforms: [{
+          orientation: probs.orientation || 'h',
+          transforms: probs.transforms || [{
             type: 'sort',
             target: 'x',
             order: 'asscending'
@@ -39,7 +39,8 @@ export function Barchart(probs) {
       ]}
       layout={{
         // yaxis: { title: { text: 'Expressway Name' } },
-        xaxis: { title: { text: 'Number of accidents' } , },
+        xaxis: { title: { text: 'Number of accidents' } , automargin: true},
+        yaxis: { automargin: true},
         title: 'Total Number of accidents',
         autosize: true
       }}

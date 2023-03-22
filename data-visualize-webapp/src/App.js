@@ -130,7 +130,7 @@ function App() {
       <Container>
         <Row>
           <Col>
-            <Header year={yearVal==='' ? 'ทั้งหมด': yearVal} roadName={roadNameVal==='' ? 'ทั้งหมด': roadNameVal} />
+            <Header className={'selected-info'} year={yearVal==='' ? 'ทั้งหมด': yearVal} roadName={roadNameVal==='' ? 'ทั้งหมด': roadNameVal} />
           </Col>
         </Row>
         <Row>
@@ -166,7 +166,15 @@ function App() {
               <Linechart times={lineChartData.times} death_counts={lineChartData.counts} />
             </div>
             <div class="item-5">
-              <Barchart locations={barChartData.roadNames} death_counts={barChartData.counts} />
+              <Barchart y={barChartData.roadNames} x={barChartData.counts} />
+            </div>
+            <div class="item-5-mobile">
+              <Barchart x={barChartData.roadNames} y={barChartData.counts} orientation='w' transforms={[{
+                  type: 'sort',
+                  target: 'y',
+                  order: 'asscending'
+                }]}
+              />
             </div>
             <div class="item-6">
               <Piechart labels={labels} values={[deadStat.total, injureStat.total]} />
