@@ -32,7 +32,7 @@ class AccidentController {
       res.status(400).send({message: "Bad Request"});
     }
   }
-
+  
   async findAllDeath(req, res) {
     const searchYear = req.query?.searchYear || '';
     const expresswayName = req.query?.expresswayName || '';
