@@ -26,9 +26,16 @@ npm start
 - **Drop down:** มี drop down ที่เอาไว้เปลี่ยน "ปี" และ "ทางพิเศษ" ของข้อมูล
 
 # Technologies Used
+- [Node.js](https://nodejs.org/en/)
+- Package Manager (NPM)
+- [MongoDB](https://www.mongodb.com/try/download/community)
+- [PostgreSQL](https://www.postgresql.org/download/)
 
 # Screenshots
+![image](https://user-images.githubusercontent.com/70587016/227253926-7d6c4639-8903-4f61-bb03-0120c76c0f64.png)
+![image](https://user-images.githubusercontent.com/70587016/227254000-f36ae5d7-2f5c-4978-ae15-934f1033c37d.png)
+
 
 # Future Work
-
+-
 # Credits
